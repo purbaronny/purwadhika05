@@ -15,8 +15,6 @@ public class Practice05 {
             throw new IllegalArgumentException("numberType is null or numberType is empty string");
         }
 
-        // TODO start
-        // check new array length based on number type
         int length = lengthNewArrayNumberType(numbers, numberType);
 
         if(length == 0) {
@@ -24,7 +22,20 @@ public class Practice05 {
         }
 
         int[] newArray = new int[length];
-        // TODO end
+        int i = 0;
+        if(numberType.equals("ODD")) {
+            for(int num : numbers) {
+                if(num % 2 == 0) {
+                    newArray[i++] = num;
+                }
+            }
+        } else {
+            for(int num : numbers) {
+                if(num % 2 != 0) {
+                    newArray[i++] = num;
+                }
+            }
+        }
 
         return newArray;
     }
@@ -47,7 +58,7 @@ public class Practice05 {
         }
 
         int length = 0;
-        if(numberType.equals("EVEN")) {
+        if(numberType.equals("ODD")) {
             for(int num : numbers) {
                 if(num % 2 == 0) {
                     length++;
@@ -113,7 +124,7 @@ public class Practice05 {
                 System.out.print(", ");
             }
         }
-        System.out.print("]");
+        System.out.println("]");
     }
 
     public void printArray(long[] numbers) {
@@ -129,6 +140,16 @@ public class Practice05 {
                 System.out.print(", ");
             }
         }
-        System.out.print("]");
+        System.out.println("]");
+    }
+
+    public static void main(String[] args) {
+        Practice05 practice05 = new Practice05();
+        int[] numbers = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        numbers = practice05.removeAllNumberType(numbers);
+        practice05.printArray(numbers);
+        numbers = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+        numbers = practice05.removeAllNumberType(numbers);
+        practice05.printArray(numbers);
     }
 }
