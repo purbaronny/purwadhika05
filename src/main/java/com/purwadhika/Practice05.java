@@ -77,6 +77,7 @@ public class Practice05 {
 
     public void printFizzBuzz(int n) {
         if(n == 0) {
+            System.out.println();
             return;
         }
 
@@ -102,7 +103,6 @@ public class Practice05 {
             throw new IllegalArgumentException("numbers is null");
         }
 
-        // TOOO start
         int length = lengthAddUp(numbers, total);
 
         if(length == 0) {
@@ -110,7 +110,13 @@ public class Practice05 {
         }
 
         int[] newArray = new int[length];
-        // TODO end
+        int i = 0;
+        for(int num : numbers) {
+            if(i < length) {
+                newArray[i++] = num;
+            }
+        }
+
         return newArray;
     }
 
@@ -120,8 +126,17 @@ public class Practice05 {
         }
 
         int length = 0;
-        // TODO start
-        // TODO end
+        long tempTotal = 0;
+        for(int num : numbers) {
+            tempTotal += num;
+            length++;
+            if(tempTotal >= total) {
+                break;
+            }
+        }
+        if(tempTotal < total) {
+            throw new NullPointerException("No pair exist");
+        }
         return length;
     }
 
@@ -166,5 +181,19 @@ public class Practice05 {
         numbers = practice05.removeAllNumberType(numbers);
         practice05.printArray(numbers);
         practice05.printFizzBuzz(15);
+        numbers = new int[]{2,7,11,15};
+        int[] testNumbers1 = practice05.addUpToTotal(numbers, 9);
+        practice05.printArray(testNumbers1);
+        int[] testNumbers2 = practice05.addUpToTotal(numbers, 10);
+        practice05.printArray(testNumbers2);
+        testNumbers2 = practice05.addUpToTotal(numbers, 1);
+        practice05.printArray(testNumbers2);
+        try {
+            testNumbers2 = practice05.addUpToTotal(numbers, 100);
+            practice05.printArray(testNumbers2);
+        } catch (NullPointerException e) {
+            System.err.println(e.getMessage());
+        }
+
     }
 }
