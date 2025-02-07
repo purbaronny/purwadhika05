@@ -76,11 +76,25 @@ public class Practice05 {
     }
 
     public void printFizzBuzz(int n) {
-        if(n < 1) {
-            throw new IllegalArgumentException("n must be integer positive value");
+        if(n == 0) {
+            return;
         }
-        // TODO start
-        // TODO end
+
+        if(n % 15 == 0) {
+            System.out.print("FizzBuzz");
+        } else if(n % 3 == 0) {
+            System.out.print("Fizz");
+        } else if(n % 5 == 0) {
+            System.out.print("Buzz");
+        } else {
+            System.out.print(n);
+        }
+
+        if(n > 1) {
+            System.out.print(", ");
+        }
+
+        printFizzBuzz(n - 1);
     }
 
     public int[] addUpToTotal(int[] numbers, int total) {
@@ -151,5 +165,6 @@ public class Practice05 {
         numbers = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
         numbers = practice05.removeAllNumberType(numbers);
         practice05.printArray(numbers);
+        practice05.printFizzBuzz(15);
     }
 }
