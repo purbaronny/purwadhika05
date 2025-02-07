@@ -34,9 +34,33 @@ public class Practice05 {
     }
 
     private int lengthNewArrayNumberType(int[] numbers, String numberType) {
+        if(numbers == null) {
+            throw new IllegalArgumentException("numbers is null");
+        }
+
+        if(numbers.length == 0) {
+            throw new IllegalArgumentException("numbers length is 0");
+        }
+
+        if(numberType == null || numberType.isEmpty()) {
+            throw new IllegalArgumentException("numberType is null or numberType is empty string");
+        }
+
         int length = 0;
-        // TODO start
-        // TODO end
+        if(numberType.equals("EVEN")) {
+            for(int num : numbers) {
+                if(num % 2 == 0) {
+                    length++;
+                }
+            }
+        } else {
+            for(int num : numbers) {
+                if(num % 2 != 0) {
+                    length++;
+                }
+            }
+        }
+
         return length;
     }
 
