@@ -39,4 +39,12 @@ public class Practice05 {
         // TODO end
         return length;
     }
+
+    public void printFizzBuzz(int n) {
+        if(n < 1) {
+            throw new IllegalArgumentException("n must be integer positive value");
+        }
+        // TODO start
+        // TODO end
+    }
 }
