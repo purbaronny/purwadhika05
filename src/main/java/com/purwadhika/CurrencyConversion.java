@@ -3,38 +3,42 @@ package com.purwadhika;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CurrencyConversion {
 
-    private static HashMap<String, Float> USDS = new HashMap<>();
-    private static HashMap<String, Float> EURS = new HashMap<>();
-    private static HashMap<String, Float> GBPS = new HashMap<>();
-    private static HashMap<String, Float> JPYS = new HashMap<>();
-    private static List<String> CURRENCYS = new ArrayList<>();
-    private String source;
-    private String target;
+    private static final Map<String, Map<String, Float>> exchangeRates = new HashMap<>();
+
+    private String source = "USD";
+    private String target = "USD";
+    private float amount = 1f;
+    private boolean check = true;
+
 
     static {
-        USDS.put("EUR", 0.85f);
-        USDS.put("GBP", 0.75f);
-        USDS.put("JPY", 110.0f);
-        EURS.put("USD", 1.18f);
-        EURS.put("GBP", 0.88f);
-        EURS.put("JPY", 130.0f);
-        GBPS.put("USD", 1.33f);
-        GBPS.put("EUR", 1.14f);
-        GBPS.put("JPY", 150.0f);
-        JPYS.put("USD", 0.0091f);
-        JPYS.put("EUR", 0.0077f);
-        JPYS.put("GBP", 0.0067f);
+        exchangeRates.put("USD", new HashMap<>());
+        exchangeRates.put("EUR", new HashMap<>());
+        exchangeRates.put("GBP", new HashMap<>());
+        exchangeRates.put("JPY", new HashMap<>());
 
-        CURRENCYS.add("USD");
-        CURRENCYS.add("EUR");
-        CURRENCYS.add("GBP");
-        CURRENCYS.add("JPY");
+        exchangeRates.get("USD").put("EUR", 0.92f);
+        exchangeRates.get("USD").put("GBP", 0.79f);
+        exchangeRates.get("USD").put("JPY", 147.65f);
+
+        exchangeRates.get("EUR").put("USD", 1 / 0.92f);
+        exchangeRates.get("EUR").put("GBP", exchangeRates.get("EUR").get("USD") * 0.79f);
+        exchangeRates.get("EUR").put("JPY", exchangeRates.get("EUR").get("USD") * 147.65f);
+
+        exchangeRates.get("GBP").put("USD", 1 / 0.79f);
+        exchangeRates.get("GBP").put("EUR", 1 / exchangeRates.get("EUR").get("GBP"));
+        exchangeRates.get("GBP").put("JPY", exchangeRates.get("GBP").get("USD") * 147.65f);
+
+        exchangeRates.get("JPY").put("USD", 1 / 147.65f);
+        exchangeRates.get("JPY").put("EUR", 1 / exchangeRates.get("EUR").get("JPY"));
+        exchangeRates.get("JPY").put("GBP", 1 / exchangeRates.get("GBP").get("JPY"));
     }
 
-    public float conversion(String source, String target) {
+    public float conversion(String source, String target, float amount) {
         if(source == null || source.isEmpty()) {
             throw new IllegalArgumentException("source is null or empty string");
         }
@@ -43,16 +47,21 @@ public class CurrencyConversion {
             throw new IllegalArgumentException("source is null or empty string");
         }
 
-        this.source = source;
-        this.target = target;
-        // TODO start
-        // TODO end
-        throw new UnsupportedOperationException("conversion is not supported");
+        if(amount < 0) {
+            throw new IllegalArgumentException("amount must be positive numbers");
+        }
+
+        if(check) {
+            this.source = source;
+            this.target = target;
+        }
+        return amount * exchangeRates.get(source).get(target);
     }
 
     public float reverseConversion() {
-        // TODO start
-        // TODO end
-        throw new UnsupportedOperationException("conversion is not supported");
+        check = false;
+        float exchange = conversion(target, source, amount);
+        check = true;
+        return exchange;
     }
 }
