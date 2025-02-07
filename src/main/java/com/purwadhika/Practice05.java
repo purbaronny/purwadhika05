@@ -25,6 +25,8 @@ public class Practice05 {
 
         int[] newArray = new int[length];
         // TODO end
+
+        return newArray;
     }
 
     public int[] removeAllNumberType(int[] numbers) {
