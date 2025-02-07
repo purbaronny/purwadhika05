@@ -1,5 +1,7 @@
 package com.purwadhika;
 
+import java.util.Scanner;
+
 public class Practice05 {
 
     public int[] removeAllNumberType(int[] numbers, String numberType) {
@@ -194,6 +196,32 @@ public class Practice05 {
         } catch (NullPointerException e) {
             System.err.println(e.getMessage());
         }
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the amount to convert: ");
+        float amount = scanner.nextFloat();
+        scanner.nextLine(); // consume newline
+
+        System.out.print("Enter the source currency (USD, EUR, GBP, or JPY): ");
+        String source = scanner.nextLine().toUpperCase();
+
+        System.out.print("Enter the target currency (USD, EUR, GBP, or JPY): ");
+        String target = scanner.nextLine().toUpperCase();
+
+        CurrencyConversion currencyConversion = new CurrencyConversion();
+        try {
+            float convertedAmount = currencyConversion.conversion(source, target, amount);
+            System.out.printf("%.2f %s is equal to %.2f %s%n", amount, source, convertedAmount, target);
+
+            System.out.println("reversed conversion");
+            convertedAmount = currencyConversion.reverseConversion();
+            System.out.printf("%.2f %s is equal to %.2f %s%n", amount, target, convertedAmount, source);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        scanner.close();
 
     }
 }
