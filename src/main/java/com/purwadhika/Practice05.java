@@ -47,4 +47,64 @@ public class Practice05 {
         // TODO start
         // TODO end
     }
+
+    public int[] addUpToTotal(int[] numbers, int total) {
+        if(numbers == null) {
+            throw new IllegalArgumentException("numbers is null");
+        }
+
+        // TOOO start
+        int length = lengthAddUp(numbers, total);
+
+        if(length == 0) {
+            throw new NullPointerException("No pair exist");
+        }
+
+        int[] newArray = new int[length];
+        // TODO end
+        return newArray;
+    }
+
+    public int lengthAddUp(int[] numbers, int total) {
+        if(numbers == null) {
+            throw new IllegalArgumentException("numbers is null");
+        }
+
+        int length = 0;
+        // TODO start
+        // TODO end
+        return length;
+    }
+
+    public void printArray(int[] numbers) {
+        if(numbers == null) {
+            throw new IllegalArgumentException("numbers is null");
+        }
+
+        int length = numbers.length;
+        System.out.print("[");
+        for(int i = 0; i < length; i++) {
+            System.out.print(numbers[i]);
+            if(i < length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.print("]");
+    }
+
+    public void printArray(long[] numbers) {
+        if(numbers == null) {
+            throw new IllegalArgumentException("numbers is null");
+        }
+
+        int length = numbers.length;
+        System.out.print("[");
+        for(int i = 0; i < length; i++) {
+            System.out.print(numbers[i]);
+            if(i < length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.print("]");
+    }
 }
